@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Restaurant Picker</title>
+<!--stylesheets-->
+  <!--Bootstrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+<!--Scripts-->
+  <!--jQuery-->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+  <!--My shit-->
+  <script src="index.js" charset="utf-8"></script>
+
+</head>
+
+<body>
+  <div class="d-flex justify-content-center">
+
+    <h1>RESTAURANT PICKER</h1>
+
+    <form autocomplete="off" action="/" method="POST">
+
+      <div class="address row">
+        <div class="autocomplete" style="width:300px;">
+          <input id="myInput" type="text" name="address" placeholder="Address">
+        </div>
+        <button type="button" id="location"><i class="fa fa-map-marker"
+            aria-hidden="true"></i></button>
+        <button type="submit">Go!</button>
+        <br>
+      </div>
+
+
+      <div class="row options">
+        <input type="text" list="cuisine" name="type" placeholder="Optional Cuisine" />
+        <datalist id="cuisine" name="cuisine">
+        </datalist>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input name="price" type="checkbox" value="1" autocomplete="off" checked>
+            $
+          </label>
+          <label class="btn btn-secondary">
+            <input name="price" type="checkbox" value="2" autocomplete="off">
+            $$
+          </label>
+          <label class="btn btn-secondary">
+            <input name="price" type="checkbox" value="3" autocomplete="off">
+            $$$
+          </label>
+          <label class="btn btn-secondary">
+            <input name="price" type="checkbox" value="4" autocomplete="off">
+            $$$$
+          </label>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" name="transport" id="walking" autocomplete="off" value="1" checked>
+            <i class="fa fa-male" aria-hidden="true"></i>
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="transport" id="biking" autocomplete="off" value="3">
+            <i class="fa fa-bicycle" aria-hidden="true"></i>
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="transport" id="transit" autocomplete="off" value="5">
+            <i class="fa fa-train" aria-hidden="true"></i>
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="transport" id="driving" autocomplete="off" value="10">
+            <i class="fa fa-car" aria-hidden="true"></i>
+          </label>
+        </div>
+    </form>
+  </div>
+</body>
+
+</html>
