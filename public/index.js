@@ -107,16 +107,15 @@
 
   //autocomplete address box
   function getAutocomplete() {
-    let params = new FormData();
-    params.append("address", id('myInput').value);
-
-    // Display the key/value pairs
-    for (var pair of params.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
     fetch('/autocomplete', {
         method: 'POST',
-        body: params
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          address: id('myInput').value
+       })
       })
       .then(checkStatus)
       .then(res => res.json())

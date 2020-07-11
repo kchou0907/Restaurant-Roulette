@@ -33,7 +33,13 @@ app.get('/categories', function(req, res){
 
 app.post('/autocomplete', function(req, res){
   let typed = req.body.address;
-  console.log(req.body);
+  console.log(typed);
+  getAutocomplete(typed)
+  .then(function(result){
+    console.log(result);
+    res.send(result);
+  })
+  .catch(error => console.log('error', error));
 });
 
 app.post("/", function(req,res){
@@ -63,6 +69,12 @@ function getCategories() {
   return fetch("https://api.yelp.com/v3/categories", requestOptions)
     .then(checkStatus)
     .then(result => result.json());
+}
+
+function getAutocomplete(input) {
+  return fetch("https://api.locationiq.com/v1/autocomplete.php?" + "key=" + GEOCODING_KEY + "&q=" + input)
+  .then(checkStatus)
+  .then(result => result.json());
 }
 
 /**
