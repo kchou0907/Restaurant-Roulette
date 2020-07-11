@@ -46,7 +46,7 @@ app.post("/", function(req,res){
   console.log(req.body);
   let data = req.body;
 
-  let location = req.body.address.split(",");
+  let from = req.body.address.split(",");
   let cuisine = req.body.cuisine || "";
   let price = req.body.price;
 
@@ -54,7 +54,8 @@ app.post("/", function(req,res){
   let transportList = { 1: 'walking', 3: 'biking', 5: 'transit', 10: 'driving' };
   let transport = transportList[distance];
 
-  console.log(location);
+  res.redirect('https://www.google.com/maps/dir/?api=1&origin=5557+San+Antonio+Street%2C+Pleasanton%2C+CA&destination=416+Barber+Ln%2C+Milpitas%2C+CA+95035&travelmode=walking&dir_action=navigate');
+  console.log(from);
 });
 
 function getCategories() {
