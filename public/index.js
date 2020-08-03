@@ -9,22 +9,57 @@
  */
 
 "use strict";
-
 (function () {
 
-  /**
-   * Add a function that will be called when the window is loaded.
-   */
   window.addEventListener("load", init);
 
   /**
-   * CHANGE: Describe what your init function does here.
+   * Adds options to the dropdowns, clears the input when someone clicks on those dropdowns,
+   * initializes address autocomplete, initializes html5 geolocation
    */
   function init() {
     getCategories();
+    ratings();
+    qs('input[name="rating"]').addEventListener('click', clearInput);
+    qs('input[name="type"]').addEventListener('click', clearInput);
     id('location').addEventListener('click', getLocation);
-    //uncomment for Google Autocomplete (auto charges after certain # of searches)
-    //initialize();
+    getCountry();
+  }
+
+  /**
+   * Clears the dropdowns once user clicks on them
+   */
+  function clearInput() {
+    this.value = "";
+  }
+
+  /**
+   * Appends the possible minimum rating values to dropdown
+   */
+  function ratings() {
+    let rating = id('rating');
+
+    for (let i = 1.0; i <= 5; i += 0.5) {
+      var option = gen('option');
+      option.innerHTML = i;
+      option.setAttribute('value', i);
+      rating.appendChild(option);
+    }
+  }
+
+  /**
+   * Obtains country that user is in + passes that into address autocomplete
+   */
+  function getCountry() {
+    fetch('/trace')
+    .then(checkStatus)
+    .then(res => res.json())
+    .then(function (res) {
+      console.log(res);
+      console.log('country is ' + res.countryCode);
+      initialize(res.countryCode);
+    })
+    .catch(error => alert('Error: cannot locate country! \n' + error))
   }
 
   /**
@@ -41,7 +76,7 @@
         let titles = processRestaurants(restaurantOnly);
         appendOption(titles);
       })
-      .catch(error => console.log('error', error));
+      .catch(error => alert('error', error));
   }
 
   /**
@@ -62,7 +97,7 @@
    * @param {Array} types - array of all the cuisine names
    */
   function appendOption(types) {
-    let cuisine = document.getElementById('cuisine');
+    let cuisine = id('cuisine');
 
     //put different categories into dropdown
     types.forEach(function (item, index) {
@@ -74,7 +109,9 @@
   }
 
 
-  //location data
+  /**
+   * Geolocation
+   */
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -83,11 +120,20 @@
     }
   }
 
+  /**
+   * Fills the address bar with the user's current lat and long
+   * @param {Object} position - object containing the user's lat long
+   */
   function showPosition(position) {
+    console.log(position.coords.accuracy)
     let latlon = position.coords.latitude + ", " + position.coords.longitude;
     name("address")[0].value = latlon;
   }
 
+  /**
+   * Alerts user to what went wrong with geolocation
+   * @param {Object} error - what went wrong with geolocation
+   */
   function showError(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:
@@ -105,17 +151,18 @@
     }
   }
 
-//Location Autocomplete
-  function initialize() {
-    var input = document.querySelector('.address input');
+ /**
+  * Address autocomplete
+  * @param {String} country - String containing the user's current country
+  */
+  function initialize(country) {
+    var input = qs('.address input');
     var options = {
       types: ['(cities)'],
-      componentRestrictions: {country: 'usa'}
+      componentRestrictions: {country: country}
     };
     new google.maps.places.Autocomplete(input);
   }
-
-
 
   /** ------------------------------ Helper Functions  ------------------------------ */
   /**
@@ -137,7 +184,6 @@
     throw Error('Error in request: ' + response.statusText);
 
   }
-
 
   /**
    * Returns all the elements that has the name attribute with the specificied value

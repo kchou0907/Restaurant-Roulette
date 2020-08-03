@@ -1,0 +1,240 @@
+/* For devices below medium size (phones) */
+
+body {
+  text-align: center;
+  margin-top: 25%;
+}
+
+/* Top portion */
+h1 {
+  font-size: 5em;
+}
+
+h1, .address {
+  display: block;
+}
+
+/* Address portion */
+.address {
+  border: solid;
+  border-radius: 100px;
+  border-width: 1px;
+}
+
+.address input {
+  width: 90%;
+  height: 100%;
+  font-size: 3em;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+}
+
+.address {
+ margin: 1vw;
+ position: relative;
+}
+
+.address button {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  width: 5%;
+  position: absolute;
+  right: 20px;
+}
+
+/* Options portion */
+
+.options {
+  display: block;
+  margin: 2vw;
+}
+
+/* Transport + Price */
+
+.btn-group {
+  display: inline-block;
+  margin: 1vw;
+  text-align: left;
+}
+
+h5 {
+  display: inline-flex;
+  margin: 0;
+  font-size: 2em;
+}
+
+.btn {
+  margin-top: 20px;
+}
+
+/* Price checkboxes */
+
+.btn-group input {
+  transform: scale(2);
+  margin-right: 20px;
+}
+
+label {
+  font-size: 2em;
+}
+
+/* Transport checkboxes */
+
+#transport {
+  margin-right: 100px;
+}
+
+.fa {
+  font-size: 37px;
+}
+
+/* Options dropdowns */
+
+#dropdowns input {
+  font-size: 2em;
+  border: solid;
+  border-width: 1px;
+}
+
+input[name="cuisine"] {
+  width: 30%;
+}
+
+input[name="rating"] {
+  width: 20%;
+}
+
+/* Submit Button */
+
+button[type="submit"] {
+  display: block;
+  margin: auto;
+  font-size: 2.5em;
+  width: 20%;
+  border-radius: 10px;
+  border: none;
+  background-color: #e8e8e8;
+}
+
+/* Autocomplete */
+
+.pac-item-query,
+.pac-item {
+  font-size: 1.5em;
+}
+
+.pac-item {
+  height: 2.5em;
+  padding-top: 30px;
+}
+
+.pac-icon {
+  transform: scale(2);
+  margin-right: 10px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+/* For landscape */
+@media screen and (orientation: landscape) {
+  body {
+    margin-top: 0;
+  }
+}
+
+/* For medium devices and above (landscape tablets, desktop) */
+@media screen and (min-width: 1025px) {
+  body {
+    margin-top: 10%;
+  }
+
+  h1 {
+    font-size: 3.5em;
+  }
+
+  /* Address */
+
+  .address {
+    margin: auto;
+    width: 70%;
+  }
+
+  .address input {
+    font-size: 1em;
+  }
+
+  .address button {
+    right: 0;
+  }
+
+
+  /* Icons */
+
+  .fa {
+    font-size: 20px;
+  }
+
+  /* Options */
+
+  /* Transport + Price */
+
+  .btn {
+    margin: 0 15px;
+    display: inline-block;
+  }
+
+  h5,
+  label,
+  #dropdowns input {
+    font-size: 1.5em;
+  }
+
+  .btn-group input {
+    transform: none;
+  }
+
+  #transport {
+    margin-right: 50px;
+  }
+
+  /* Autocomplete */
+
+  .pac-item-query,
+  .pac-item {
+    font-size: 11px;
+  }
+
+  .pac-item {
+    height: auto;
+    padding-top: 0;
+  }
+
+  .pac-icon {
+    transform: none;
+    margin-right: 7px;
+  }
+
+  /* Dropdowns */
+
+  input[name="rating"] {
+    width: 10%;
+  }
+
+  input[name="type"] {
+    width: 15%;
+  }
+
+  /* Submit Button */
+
+  button[type="submit"] {
+    width: 10%;
+    font-size: 2em;
+  }
+}
