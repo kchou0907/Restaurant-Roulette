@@ -26,7 +26,7 @@ app.listen(3000, function(req, res){
 app.get('/categories', function(req, res){
   getCategories()
   .then(result => res.send(result))
-  .catch(error => alert('Error: ', error));
+  .catch(error => console.log('Error: ', error));
 });
 
 /**
@@ -35,7 +35,7 @@ app.get('/categories', function(req, res){
 app.get('/trace', function (req, res) {
   traceIp()
   .then(result => res.send(result))
-  .catch(error => alert('Error: country not found \n' + error));
+  .catch(error => console.log('Error: country not found \n' + error));
 })
 
 /**
@@ -43,6 +43,9 @@ app.get('/trace', function (req, res) {
  */
 app.post("/", function(req,res){
   console.log(req.body);
+  let ua = req.headers['user-agent'];
+  console.log(ua);
+
   let data = req.body;
   let from = req.body.address;
   let cuisine = req.body.cuisine || "";
@@ -56,9 +59,9 @@ app.post("/", function(req,res){
   getLocation(from, cuisine, distance, price)
   .then(function(result){
     let end = chooseLocation(result, rating);
-    startNav(res, from, end, transport);
+    startNav(res, from, end, transport, ua);
   })
-  .catch(error => alert('Error: ' + error));
+  .catch(error => console.log('Error: ' + error));
   console.log(transport);
   console.log(from);
 });
@@ -139,11 +142,23 @@ function chooseLocation(locationData, rating) {
  * @param {String} end - Ending location
  * @param {String} transport - Transport type (walk, bike, public transport, car)
  */
-function startNav(res, start, end, transport) {
+function startNav(res, start, end, transport, ua) {
   console.log(end.join(', '));
   console.log(transport);
-  res.redirect('https://www.google.com/maps/dir/?api=1&origin=' +
-  start + '&destination=' + end.join(', ') + '&travelmode=' + transport + '&dir_action=navigate');
+  if (/Macintosh/.test(ua)) {
+    let letter = transport.charAt(0);
+    if (letter === 'd') {
+      letter = 't';
+    } else if (letter ==='t') {
+      letter = 'r';
+    } else if (letter === 'b') {
+      letter = 'w';
+    }
+    res.redirect('maps://maps.google.com/maps/dir/?saddr='+ start +'&daddr='+ end.join(', ') +'&dirflg=' + letter);
+  } else {
+    res.redirect('https://google.com/maps/dir/?api=1&origin=' +
+      start + '&destination=' + end.join(', ') + '&travelmode=' + transport + '&dir_action=navigate');
+  }
 }
 
 /**

@@ -9,6 +9,7 @@
  */
 
 "use strict";
+
 (function () {
 
   window.addEventListener("load", init);
@@ -22,8 +23,24 @@
     ratings();
     qs('input[name="rating"]').addEventListener('click', clearInput);
     qs('input[name="type"]').addEventListener('click', clearInput);
+    qs('input[name="address"]').addEventListener('focus', focus);
+    qs('input[name="address"]').addEventListener('blur', unfocus);
     id('location').addEventListener('click', getLocation);
     getCountry();
+  }
+
+  /**
+   * Makes element unfocused when user clicks elsewhere
+   */
+  function unfocus() {
+    this.parentElement.style.boxShadow = '';
+  }
+
+  /**
+   * Makes element focused when user clicks on it
+   */
+  function focus() {
+    this.parentElement.style.boxShadow = '0 1px 6px 0 rgba(32,33,36,0.28';
   }
 
   /**
@@ -114,20 +131,37 @@
    */
   function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
+      navigator.geolocation.watchPosition(translateCoords, showError);
     } else {
       alert("Geolocation is not supported by this browser.");
     }
   }
 
   /**
-   * Fills the address bar with the user's current lat and long
+   * Finds user's current lat and long and turns it into an address
    * @param {Object} position - object containing the user's lat long
    */
-  function showPosition(position) {
-    console.log(position.coords.accuracy)
-    let latlon = position.coords.latitude + ", " + position.coords.longitude;
-    name("address")[0].value = latlon;
+  function translateCoords(position) {
+    let latlon = position.coords.latitude + "," + position.coords.longitude;
+    let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ latlon +'&key=AIzaSyDGPfV1blRzBPZoUjLj4j_uq0xWHI5ovLI';
+    fetch(url)
+      .then(checkStatus)
+      .then(res => res.json())
+      .then(function(res) {
+        appendAddress(res);
+      })
+      .catch(error => alert('Error: ' + error));
+  }
+
+  /**
+   * Fills the address bar with the user's current address
+   * @param {Object} addyData JSON containing information on the user's current location
+   */
+  function appendAddress(addyData) {
+    console.log(addyData);
+    let addy = addyData['results'][0]['formatted_address'];
+    console.log(addy);
+    name("address")[0].value = addy;
   }
 
   /**

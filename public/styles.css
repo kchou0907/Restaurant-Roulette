@@ -1,13 +1,32 @@
 /* For devices below medium size (phones) */
 
+html, body {
+  height: 85%;
+}
+
 body {
   text-align: center;
   margin-top: 25%;
+  color: #505050;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+
+}
+
+form {
+  flex: 1 0 auto;
+}
+
+::placeholder {
+  color: lightgray;
 }
 
 /* Top portion */
 h1 {
   font-size: 5em;
+  font-family: 'Barriecito', cursive;
+  color: #d63447;
 }
 
 h1, .address {
@@ -17,8 +36,16 @@ h1, .address {
 /* Address portion */
 .address {
   border: solid;
+  border-color: lightgray;
   border-radius: 100px;
   border-width: 1px;
+  margin: 1vw;
+  position: relative;
+  background-color: white;
+}
+
+.address:hover {
+  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
 }
 
 .address input {
@@ -30,11 +57,7 @@ h1, .address {
   border: none;
   outline: none;
   border-radius: 30px;
-}
-
-.address {
- margin: 1vw;
- position: relative;
+  font-family: 'Roboto', sans-serif;
 }
 
 .address button {
@@ -44,6 +67,11 @@ h1, .address {
   width: 5%;
   position: absolute;
   right: 20px;
+  outline: none;
+}
+
+.address button:hover {
+  color: lightgray;
 }
 
 /* Options portion */
@@ -98,6 +126,9 @@ label {
   font-size: 2em;
   border: solid;
   border-width: 1px;
+  font-family: 'Roboto', sans-serif;
+  border-color: lightgray;
+  color: #505050;
 }
 
 input[name="cuisine"] {
@@ -118,6 +149,16 @@ button[type="submit"] {
   border-radius: 10px;
   border: none;
   background-color: #e8e8e8;
+  font-family: 'Roboto', sans-serif;
+  color: #505050;
+}
+
+button[type="submit"]:hover {
+  background-color: #f0f0f0;
+  color: red;
+  border: solid;
+  border-width: 1px;
+  border-color: darkgray;
 }
 
 /* Autocomplete */
@@ -137,10 +178,23 @@ button[type="submit"] {
   margin-right: 10px;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
+
+/* Footer */
+
+#footer {
+  flex-shrink: 0;
+  margin-top: auto;
 }
+
+footer {
+  margin-top: 10px;
+}
+
+em {
+  font-weight: 700;
+  color: red;
+}
+
 
 /* For landscape */
 @media screen and (orientation: landscape) {
@@ -149,8 +203,8 @@ footer {
   }
 }
 
-/* For medium devices and above (landscape tablets, desktop) */
-@media screen and (min-width: 1025px) {
+/* Large devices (laptops, tablets, desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
   body {
     margin-top: 10%;
   }
@@ -227,10 +281,14 @@ footer {
     width: 10%;
   }
 
+}
+
+/* For large devices and above (desktop) */
+@media screen and (min-width: 1200px) {
+  /* Cuisine Dropdown */
   input[name="type"] {
     width: 15%;
   }
-
   /* Submit Button */
 
   button[type="submit"] {

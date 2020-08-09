@@ -11,6 +11,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!--Mine-->
   <link rel="stylesheet" href="styles.css">
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barriecito&display=swap" rel="stylesheet">
+  <!--Favicons-->
+  <link rel="android-chrome-512" sizes="512x512" href="favicon/android-chrome-512x512.png">
+  <link rel="android-chrome-192" sizes="192x192" href="favicon/android-chrome-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
 
   <!--Scripts-->
 
@@ -25,13 +35,13 @@
 
 <body>
 
-  <h1>FOR THE BISCUIT</h1>
+  <h1>FoR ThE BiSCUIT</h1>
 
   <form autocomplete="off" action="/" method="POST">
 
     <div class="address">
       <input type="text" name="address" placeholder="Your Address" required>
-     <button type="button" id="location"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+      <button type="button" id="location"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
     </div>
 
     <div class="options">
@@ -78,15 +88,18 @@
         <input type="text" list="cuisine" name="type" placeholder="Optional Cuisine" />
         <datalist id="cuisine">
         </datalist>
-        <input type="number" list="rating" name="rating" placeholder="Min rating" value="3.5"
-        min="1" max="5" step=".5"/>
+        <input type="number" list="rating" name="rating" placeholder="Min rating" value="3.5" min="1" max="5"
+          step=".5" />
         <datalist id="rating">
         </datalist>
       </div>
     </div>
     <button type="submit">Risk it!</button>
   </form>
-  <footer>Note: slight chance the restaurant doesn't fulfill any of your params gl, hf :)</footer>
+  <div id='footer'>
+    <footer>Made by Kevin Chou © 2020</footer>
+    <footer><em>Note:</em> slight chance the restaurant doesn't fulfill any of your params gl, hf :)</footer>
+  </div>
 </body>
 
 </html>
