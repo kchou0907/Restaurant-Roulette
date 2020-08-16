@@ -64,11 +64,6 @@ span {
   cursor: default;
 }
 
-/* Animation for the logo */
-span:hover {
-  transform: scale(1.5);
-}
-
 h1, .address {
   display: block;
 }

@@ -5,11 +5,11 @@ const dotenv = require('dotenv');
 const fetch = require('node-fetch');
 const bodyparser = require('body-parser');
 
-const API_KEY = process.env.YELP_API_KEY;
-let port = process.env.PORT || 8080;
-
 dotenv.config();
 app.use(express.static("public"));
+
+const API_KEY = process.env.YELP_API_KEY;
+let port = process.env.PORT || 8080;
 
 // some middleware options for bodyparser
 app.use(bodyparser.json())
