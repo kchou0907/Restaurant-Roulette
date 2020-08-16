@@ -125,14 +125,25 @@
     });
   }
 
+  /**
+   * Starts the animation and gets the users location
+   */
+  function getLocation() {
+    addressLoad()
+      .then(clickedAnime)
+      .then(geolocate)
+  }
+
 
   /**
    * Geolocation
    */
-  function getLocation() {
+  async function geolocate() {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(translateCoords, showError);
+      navigator.geolocation.getCurrentPosition(translateCoords, showError);
     } else {
+      addressLoad();
+      clickedAnime();
       alert("Geolocation is not supported by this browser.");
     }
   }
@@ -148,9 +159,11 @@
       .then(checkStatus)
       .then(res => res.json())
       .then(function(res) {
+        unClickedAnime();
         appendAddress(res);
+        addressLoad();
       })
-      .catch(error => alert('Error: ' + error));
+      .catch(error => console.log('Error: ' + error));
   }
 
   /**
@@ -165,10 +178,39 @@
   }
 
   /**
+   * Changes the address bar to alert the user that something is happening
+   */
+  async function addressLoad() {
+    console.log(name('address'));
+    name('address')[0].classList.toggle('hidden');
+    qs('.address>p').classList.toggle('hidden');
+  }
+
+  /**
+   * Disables the location button to prevent user spam
+   */
+  function clickedAnime() {
+    let btn = id('location');
+    btn.style.color = 'lightgrey';
+    btn.removeEventListener('click', getLocation);
+  }
+
+  /**
+   * Reverts the button back to full functionality
+   */
+  function unClickedAnime() {
+    let btn = id('location');
+    btn.style.color = null;
+    btn.addEventListener('click', getLocation);
+  }
+
+  /**
    * Alerts user to what went wrong with geolocation
    * @param {Object} error - what went wrong with geolocation
    */
   function showError(error) {
+    addressLoad();
+    clickedAnime();
     switch (error.code) {
       case error.PERMISSION_DENIED:
         alert("User denied the request for Geolocation.");

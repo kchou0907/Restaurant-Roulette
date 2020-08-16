@@ -35,12 +35,17 @@
 
 <body>
 
-  <h1>FoR ThE BiSCUIT</h1>
+  <h1>
+    <span id='f'>F</span><span id='o'>O</span><span id='r'>R</span>
+    <span class='t'>T</span><span id='h'>H</span><span id='e'>E</span>
+    <span id='b'>B</span><span class='i'>I</span><span id='s'>S</span><span id='c'>C</span><span id='u'>U</span><span class='i'>I</span><span class='t'>T</span>
+  </h1>
 
   <form autocomplete="off" action="/" method="POST">
 
     <div class="address">
       <input type="text" name="address" placeholder="Your Address" required>
+      <p class="hidden">Please Wait...</p>
       <button type="button" id="location"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
     </div>
 
@@ -48,7 +53,7 @@
       <div class="btn-group" id='transport' data-toggle="buttons">
         <h5>Transport:</h5>
         <div class="btn">
-          <input type="radio" name="transport" id="walking" autocomplete="off" value="1" checked>
+          <input type="radio" name="transport" id="walking" autocomplete="off" value="0.5" checked>
           <i class="fa fa-male" aria-hidden="true"></i>
         </div>
         <div class="btn">

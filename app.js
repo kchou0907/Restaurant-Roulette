@@ -51,9 +51,9 @@ app.post("/", function(req,res){
   let cuisine = req.body.cuisine || "";
   let price = req.body.price;
   let rating = req.body.rating;
-  let maxMiles = parseInt(data.transport);
+  let maxMiles = parseFloat(data.transport);
   let distance = Math.ceil(maxMiles * 1609.34);
-  let transportList = { 1: 'walking', 3: 'bicycling', 5: 'transit', 10: 'driving' };
+  let transportList = { 0.5: 'walking', 3: 'bicycling', 5: 'transit', 10: 'driving' };
   let transport = transportList[maxMiles];
 
   getLocation(from, cuisine, distance, price)
@@ -61,7 +61,7 @@ app.post("/", function(req,res){
     let end = chooseLocation(result, rating);
     startNav(res, from, end, transport, ua);
   })
-  .catch(error => console.log('Error: ' + error));
+  .catch(error => res.sendFile(__dirname + '/public/error.html'));
   console.log(transport);
   console.log(from);
 });
@@ -143,8 +143,13 @@ function chooseLocation(locationData, rating) {
  * @param {String} transport - Transport type (walk, bike, public transport, car)
  */
 function startNav(res, start, end, transport, ua) {
-  console.log(end.join(', '));
-  console.log(transport);
+  start = encodeURIComponent(start);
+  end = encodeURIComponent(end.join(', '));
+
+  console.log('start: ' + start);
+  console.log('end: ' + end);
+  console.log('transport: ' + transport);
+
   if (/Macintosh/.test(ua)) {
     let letter = transport.charAt(0);
     if (letter === 'd') {
@@ -154,10 +159,14 @@ function startNav(res, start, end, transport, ua) {
     } else if (letter === 'b') {
       letter = 'w';
     }
-    res.redirect('maps://maps.google.com/maps/dir/?saddr='+ start +'&daddr='+ end.join(', ') +'&dirflg=' + letter);
+    console.log('apple');
+    res.redirect('maps://maps.google.com/maps/dir/?saddr='+ start +'&daddr='+ end +'&dirflg=' + letter);
   } else {
-    res.redirect('https://google.com/maps/dir/?api=1&origin=' +
-      start + '&destination=' + end.join(', ') + '&travelmode=' + transport + '&dir_action=navigate');
+    console.log('not apple');
+    console.log('https://google.com/maps/dir/?api=1&origin=' +
+    start + '&destination=' + end + '&travelmode=' + transport + '&dir_action=navigate');
+    res.redirect('https://www.google.com/maps/dir/?api=1&origin=' +
+      start + '&destination=' + end + '&travelmode=' + transport + '&dir_action=navigate');
   }
 }
 

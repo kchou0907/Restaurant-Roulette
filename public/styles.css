@@ -4,6 +4,10 @@ html, body {
   height: 85%;
 }
 
+.hidden {
+  display: none !important;
+}
+
 body {
   text-align: center;
   margin-top: 25%;
@@ -11,7 +15,6 @@ body {
   font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
-
 }
 
 form {
@@ -22,11 +25,48 @@ form {
   color: lightgray;
 }
 
+/* Error page */
+button {
+  margin: auto;
+  width: 30%;
+}
+
+img {
+  max-width: 300px;
+  margin: auto;
+}
+
 /* Top portion */
 h1 {
   font-size: 5em;
   font-family: 'Barriecito', cursive;
-  color: #d63447;
+  color: #5f817e;
+
+}
+
+#o,
+#h,
+.i {
+  color: #ffdd1e;
+}
+#e,
+#c {
+  color: #ffc934;
+}
+
+.t {
+  color: #F39A96;
+}
+
+span {
+  transition: transform ;
+  display: inline-block;
+  cursor: default;
+}
+
+/* Animation for the logo */
+span:hover {
+  transform: scale(1.5);
 }
 
 h1, .address {
@@ -48,10 +88,20 @@ h1, .address {
   box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
 }
 
-.address input {
+.address input,
+.address p {
   width: 90%;
-  height: 100%;
   font-size: 3em;
+}
+
+.address p {
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.address input {
+  height: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
   border: none;
@@ -129,6 +179,11 @@ label {
   font-family: 'Roboto', sans-serif;
   border-color: lightgray;
   color: #505050;
+}
+
+#dropdowns input:focus{
+  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+  outline: none;
 }
 
 input[name="cuisine"] {
@@ -213,6 +268,11 @@ em {
     font-size: 3.5em;
   }
 
+  /* Error Page */
+  img {
+    max-width: 500px;
+  }
+
   /* Address */
 
   .address {
@@ -220,7 +280,8 @@ em {
     width: 70%;
   }
 
-  .address input {
+  .address input,
+  .address p {
     font-size: 1em;
   }
 
