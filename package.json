@@ -4,7 +4,7 @@
   "description": "A program to help me choose where to eat",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "node app.js"
   },
   "author": "Kevin Chou",
   "license": "ISC",
