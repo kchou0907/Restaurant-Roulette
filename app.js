@@ -5,18 +5,18 @@ const dotenv = require('dotenv');
 const fetch = require('node-fetch');
 const bodyparser = require('body-parser');
 
-dotenv.config();
-
 const API_KEY = process.env.YELP_API_KEY;
+let port = process.env.PORT || 8080;
 
+dotenv.config();
 app.use(express.static("public"));
 
 // some middleware options for bodyparser
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: false }))
 
-app.listen(3000, function(req, res){
-  console.log("Server is running on port 3000");
+app.listen(port, function(req, res){
+  console.log("Server is running on port " + port);
   console.log(API_KEY);
   console.log(__dirname);
 });
