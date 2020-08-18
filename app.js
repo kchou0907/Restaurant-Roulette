@@ -123,6 +123,7 @@ function getLocation(address, cuisine, radius, price) {
     category = cuisine;
   }
 
+  console.log('category: ' + category);
   let url = 'https://api.yelp.com/v3/businesses/search?&limit=50&open_now=true';
   return fetch(url + '&location=' + address + '&radius=' + radius + '&category=' + category + '&price=' + price, requestOptions)
     .then(checkStatus)
