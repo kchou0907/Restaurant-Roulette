@@ -118,9 +118,13 @@ function getLocation(address, cuisine, radius, price) {
     },
     redirect: 'follow'
   };
+  let category = 'restaurant'
+  if (cuisine != '') {
+    category = cuisine;
+  }
 
-  let url = 'https://api.yelp.com/v3/businesses/search?&limit=50&category=restaurant&open_now=true';
-  return fetch(url + '&location=' + address + '&radius=' + radius + '&term=' + cuisine + '&price=' + price, requestOptions)
+  let url = 'https://api.yelp.com/v3/businesses/search?&limit=50&open_now=true';
+  return fetch(url + '&location=' + address + '&radius=' + radius + '&category=' + category + '&price=' + price, requestOptions)
     .then(checkStatus)
     .then(result => result.json());
 }
