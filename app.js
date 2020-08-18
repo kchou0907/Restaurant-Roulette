@@ -161,12 +161,8 @@ function startNav(res, start, end, transport, ua) {
   if (/iPhone/.test(ua) ||
     /iPod/.test(ua)) {
     let letter = transport.charAt(0);
-    if (letter === 'd') {
-      letter = 't';
-    } else if (letter === 't') {
+    if (letter === 't') {
       letter = 'r';
-    } else if (letter === 'b') {
-      letter = 'w';
     }
     console.log('apple');
     res.redirect('maps://maps.google.com/maps/dir/?saddr=' + start + '&daddr=' + end + '&dirflg=' + letter);
