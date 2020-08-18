@@ -1,11 +1,5 @@
 /**
- * Name: _your name here_
- * Date: _add date here_
- * Section: CSE 154 _your section here_
- *
- * -- your description of what this file does here --
- * Do not keep comments from this template in any work you submit (functions included under "Helper
- * functions" are an exception, you may keep the function names/comments of id/qs/qsa/gen)
+ * Functionality for main page
  */
 
 "use strict";
@@ -72,8 +66,6 @@
     .then(checkStatus)
     .then(res => res.json())
     .then(function (res) {
-      console.log(res);
-      console.log('country is ' + res.countryCode);
       initialize(res.countryCode);
     })
     .catch(error => alert('Error: cannot locate country! \n' + error))
@@ -171,9 +163,7 @@
    * @param {Object} addyData JSON containing information on the user's current location
    */
   function appendAddress(addyData) {
-    console.log(addyData);
     let addy = addyData['results'][0]['formatted_address'];
-    console.log(addy);
     name("address")[0].value = addy;
   }
 
@@ -181,7 +171,6 @@
    * Changes the address bar to alert the user that something is happening
    */
   async function addressLoad() {
-    console.log(name('address'));
     name('address')[0].classList.toggle('hidden');
     qs('.address>p').classList.toggle('hidden');
   }

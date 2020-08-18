@@ -1,11 +1,5 @@
 /**
- * Name: _your name here_
- * Date: _add date here_
- * Section: CSE 154 _your section here_
- *
- * -- your description of what this file does here --
- * Do not keep comments from this template in any work you submit (functions included under "Helper
- * functions" are an exception, you may keep the function names/comments of id/qs/qsa/gen)
+ * Functionality for the error page
  */
 "use strict";
 

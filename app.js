@@ -17,11 +17,7 @@ app.use(bodyparser.urlencoded({
   extended: false
 }))
 
-app.listen(port, function (req, res) {
-  console.log("Server is running on port " + port);
-  console.log(API_KEY);
-  console.log(__dirname);
-});
+app.listen(port);
 
 /**
  * All the categories on Yelp
@@ -47,7 +43,6 @@ app.get('/trace', function (req, res) {
 app.post("/", function (req, res) {
   console.log(req.body);
   let ua = req.headers['user-agent'];
-  console.log(ua);
 
   let data = req.body;
   let from = req.body.address;
@@ -70,8 +65,6 @@ app.post("/", function (req, res) {
       startNav(res, from, end, transport, ua);
     })
     .catch(error => res.sendFile(__dirname + '/public/error.html'));
-  console.log(transport);
-  console.log(from);
 });
 
 /**
@@ -123,7 +116,6 @@ function getLocation(address, cuisine, radius, price) {
     category = cuisine;
   }
 
-  console.log('category: ' + category);
   let url = 'https://api.yelp.com/v3/businesses/search?&limit=50&open_now=true';
   return fetch(url + '&location=' + address + '&radius=' + radius + '&category=' + category + '&price=' + price, requestOptions)
     .then(checkStatus)
@@ -159,22 +151,14 @@ function startNav(res, start, end, transport, ua) {
   start = encodeURIComponent(start);
   end = encodeURIComponent(end.join(', '));
 
-  console.log('start: ' + start);
-  console.log('end: ' + end);
-  console.log('transport: ' + transport);
-
   if (/iPhone/.test(ua) ||
     /iPod/.test(ua)) {
     let letter = transport.charAt(0);
     if (letter === 't') {
       letter = 'r';
     }
-    console.log('apple');
     res.redirect('maps://maps.google.com/maps/dir/?saddr=' + start + '&daddr=' + end + '&dirflg=' + letter);
   } else {
-    console.log('not apple');
-    console.log('https://google.com/maps/dir/?api=1&origin=' +
-      start + '&destination=' + end + '&travelmode=' + transport + '&dir_action=navigate');
     res.redirect('https://www.google.com/maps/dir/?api=1&origin=' +
       start + '&destination=' + end + '&travelmode=' + transport + '&dir_action=navigate');
   }
