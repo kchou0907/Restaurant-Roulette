@@ -150,6 +150,7 @@ function chooseLocation(locationData, rating) {
 function startNav(res, start, end, transport, ua) {
   start = encodeURIComponent(start);
   end = encodeURIComponent(end.join(', '));
+  console.log('end: ' + end);
 
   if (/iPhone/.test(ua) ||
     /iPod/.test(ua)) {
