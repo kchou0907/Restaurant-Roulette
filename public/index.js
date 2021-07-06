@@ -51,8 +51,12 @@
     let rating = id('rating');
 
     for (let i = 1.0; i <= 5; i += 0.5) {
-      var option = gen('option');
-      option.innerHTML = i;
+      let option = gen('option');
+      let grammar = "stars";
+      if (i === 1) {
+        grammar = "star";
+      }
+      option.innerHTML = `${i} ${grammar}`;
       option.setAttribute('value', i);
       rating.appendChild(option);
     }
