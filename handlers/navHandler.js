@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv');
 const fetch = require('node-fetch');
 const {checkStatus} = require('../helpers/helperFunctions')
 
