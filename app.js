@@ -16,7 +16,7 @@ let port = process.env.PORT || 8080;
 // some middleware options for bodyparser
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({
-  extended: false 
+  extended: false
 }))
 
 app.listen(port);
