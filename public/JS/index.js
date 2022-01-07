@@ -150,7 +150,7 @@
    */
   function translateCoords(position) {
     let latlon = position.coords.latitude + "," + position.coords.longitude;
-    let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ latlon +'&key=AIzaSyDGPfV1blRzBPZoUjLj4j_uq0xWHI5ovLI';
+    let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ latlon +'&key=AIzaSyBWMLH79IgUEk8DDfJmWX-cqrGiXWZHc7o';
     fetch(url)
       .then(checkStatus)
       .then(res => res.json())
