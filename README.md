@@ -17,6 +17,6 @@ This is a website/app for restaurant discovery written using HTML, CSS, JS + Nod
 
 ## Future plans:
 - Create login microservice using Go, NoSQL, and Redis so that users can see a history + give a review of the places they went to
-- Dockerize the backend and formally launch the website using AWS
+- Dockerize the backend
 - Turn this into an Android (and perhaps iOS) app to have better "default phone navigation" integration
 - Implement a ML system that tries to guess what the user would enjoy instead of it being random
